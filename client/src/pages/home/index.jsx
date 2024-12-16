@@ -1,16 +1,17 @@
-import styles from './styles.module.css';
-import { useNavigate } from 'react-router-dom'; // Add this
+import React from "react";
+import styles from "./styles.module.css";
+import { useNavigate } from "react-router-dom"; // Add this
 
-const Home = ({ username, setUsername, room, setRoom, socket }) => {
+export default function Home({ username, setUsername, room, setRoom, socket }) {
   const navigate = useNavigate(); // Add this
 
   const joinRoom = () => {
-    if (room !== '' && username !== '') {
-      socket.emit('join_room', { username, room });
+    if (room !== "" && username !== "") {
+      socket.emit("join_room", { username, room });
     }
 
     // Redirect to /chat
-    navigate('/chat', { replace: true });
+    navigate("/chat", { replace: true });
   };
 
   return (
@@ -19,7 +20,7 @@ const Home = ({ username, setUsername, room, setRoom, socket }) => {
         <h1>{`<>DevRooms</>`}</h1>
         <input
           className={styles.input}
-          placeholder='Username...'
+          placeholder="Username..."
           onChange={(e) => setUsername(e.target.value)}
         />
 
@@ -28,15 +29,15 @@ const Home = ({ username, setUsername, room, setRoom, socket }) => {
           onChange={(e) => setRoom(e.target.value)}
         >
           <option>-- Select Room --</option>
-          <option value='javascript'>JavaScript</option>
-          <option value='node'>Node</option>
-          <option value='express'>Express</option>
-          <option value='react'>React</option>
+          <option value="javascript">JavaScript</option>
+          <option value="node">Node</option>
+          <option value="express">Express</option>
+          <option value="react">React</option>
         </select>
 
         <button
-          className='btn btn-secondary'
-          style={{ width: '100%' }}
+          className="btn btn-secondary"
+          style={{ width: "100%" }}
           onClick={joinRoom}
         >
           Join Room
@@ -44,6 +45,4 @@ const Home = ({ username, setUsername, room, setRoom, socket }) => {
       </div>
     </div>
   );
-};
-
-export default Home;
+}
